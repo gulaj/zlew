@@ -1,0 +1,51 @@
+﻿<link rel="import" href="/sys/chart-elements/chart-line.html" />
+
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/chartpage-heading" class="kitchensink-heading-1">Chart</h1>
+
+        <p slot="kitchensink/chartpage-description">JSON's <code>array</code> can be used to create a chart with a helper custom element, e.g. <a href="http://robdodson.github.io/chart-elements">chart-elements</a>.</p>
+        
+        <kitchensink-chart slot="kitchensink/chartpage-chart" temperatures="{{model.Temperatures}}" labels="{{model.Labels}}"></kitchensink-chart>
+    </template>
+</template>
+
+<dom-module id="kitchensink-chart">
+    <template>
+        <chart-line id="chrt" data="[[chartData]]"></chart-line>
+    </template>
+    <script>
+        Polymer({
+            is: "kitchensink-chart",
+            properties: {
+                temperatures: {
+                    type: Array,
+                    observer: 'updateChartData'
+                },
+
+                labels: {
+                    type: Array,
+                    observer: 'updateChartData'
+                }
+            },
+
+            updateChartData: function () {
+                this.chartData = {
+                    labels: this.labels,
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.2)",
+                            strokeColor: "rgba(220,220,220,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: this.temperatures
+                        }
+                    ]
+                };
+            }
+        });
+    </script>
+</dom-module>

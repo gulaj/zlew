@@ -1,0 +1,66 @@
+﻿<link rel="import" href="/sys/juicy-select/juicy-select.html" />
+
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/dropdown-heading" class="kitchensink-heading-1">Dropdown</h1>
+        <h2 slot="kitchensink/dropdown-primitive-array-heading" class="kitchensink-heading-2">Primitive array</h2>
+        <p slot="kitchensink/dropdown-pets-description">A combination of JSON's primitive value types <code>array</code>, <code>object</code> and <code>number</code> can be mapped to an HTML <code>select</code> element.</p>
+
+        <select slot="kitchensink/dropdown-pets-dropdown" class="kitchensink-select kitchensink-test-pets-select" value="{{model.SelectedPet$::change}}">
+            <template is="dom-repeat" items="{{model.Pets}}">
+                <option value="{{item.Label}}">{{item.Label}}</option>
+            </template>
+        </select>
+
+        <div slot="kitchensink/dropdown-pets-reaction" class="kitchensink-test-pet-like-label">{{model.PetReaction}}</div>
+
+        <h2 slot="kitchensink/dropdown-objects-heading" class="kitchensink-heading-2">Objects array</h2>
+
+        <p slot="kitchensink/dropdown-objects-description">A combination of object <code>array</code> and bound JSON string property can be mapped to an HTML <code>select</code> element.</p>
+   
+        <small slot="kitchensink/dropdown-objects-select-description">Polymer 1.x executes the <code>value</code> binding in the <code>select</code> element before evaluating <code>dom-repeat</code>. This makes it impossible to preselect an <code>option</code> element, which is illustrated below ("Starcounter Database" should be preselected).</small>
+        
+        <select slot="kitchensink/dropdown-objects-select" class="kitchensink-select kitchensink-test-product-select" value="{{model.SelectedProductKey$::change}}">
+            <template is="dom-repeat" items="{{model.Products}}">
+                <option value="{{item.Key}}">{{item.Name}}</option>
+            </template>
+        </select>
+
+        <small slot="kitchensink/dropdown-objects-juicy-select-description">You can use custom element <code>juicy-select</code> to workaround the above issue.</small>
+
+        <juicy-select slot="kitchensink/dropdown-objects-juicy-select" class="kitchensink-juicyselect kitchensink-test-juicy-select" caption-text="" value="{{model.SelectedProductKey$}}" options="{{model.Products}}" text-property="Name" value-property="Key"></juicy-select>
+        
+        <div slot="kitchensink/dropdown-objects-select-label">
+            <template is="dom-if" if="{{model.SelectedProduct.Name}}">
+                <p class="kitchensink-test-juicy-select-label">You have selected: <strong>{{model.SelectedProduct.Name}}</strong></p>
+            </template>
+        </div>
+    </template>
+    <template is="declarative-shadow-dom">
+        <style>
+            .kitchensink-dropdown-margin {
+                margin-bottom: 20px;
+            }
+        </style>
+
+        <slot name="kitchensink/dropdown-heading"></slot>
+        <slot name="kitchensink/dropdown-primitive-array-heading"></slot>
+        <slot name="kitchensink/dropdown-pets-description"></slot>
+        <slot name="kitchensink/dropdown-pets-dropdown"></slot>
+        <div class="kitchensink-dropdown-margin">
+            <slot name="kitchensink/dropdown-pets-reaction"></slot>
+        </div>
+        <slot name="kitchensink/dropdown-objects-heading"></slot>
+        <slot name="kitchensink/dropdown-objects-description"></slot>
+        <slot name="kitchensink/dropdown-objects-value-description"></slot>
+        <slot name="kitchensink/dropdown-objects-select-description" class="kitchensink-dropdown-margin"></slot>
+        <div class="kitchensink-dropdown-margin">
+            <slot name="kitchensink/dropdown-objects-select"></slot>
+        </div>
+        <slot name="kitchensink/dropdown-objects-juicy-select-description" class="kitchensink-dropdown-margin"></slot>
+        <div class="kitchensink-dropdown-margin">
+            <slot name="kitchensink/dropdown-objects-juicy-select"></slot>
+        </div>
+        <slot name="kitchensink/dropdown-objects-select-label"></slot>
+    </template>
+</template>

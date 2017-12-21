@@ -1,0 +1,26 @@
+﻿<link rel="import" href="/sys/pikaday-decorator/pikaday-decorator.html" />
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/datepicker-heading" class="kitchensink-heading-1">Datepicker</h1>
+
+        <p slot="kitchensink/datepicker-description">JSON's primitive value type <code>string</code> can be mapped directly to HTML form <code>input type="text"</code> with a datepicker.</p>
+
+        <label slot="kitchensink/datepicker-date-label" class="control-label">Date</label>
+
+        <pikaday-decorator slot="kitchensink/datepicker-pikaday" format="YYYY-MM-DD">
+            <input type="text" value="{{model.Value$::change}}" class="form-control kitchensink-test-pikaday-input" placeholder="Select a date to parse" />
+        </pikaday-decorator>
+
+        <label slot="kitchensink/datepicker-year-label" class="control-label">Year</label>
+
+        <input slot="kitchensink/datepicker-year-input" type="text" value="{{model.Year}}" readonly="readonly" class="form-control kitchensink-test-year-input" />
+
+        <label slot="kitchensink/datepicker-month-label" class="control-label">Month</label>
+
+        <input slot="kitchensink/datepicker-month-input" type="text" value="{{model.Month}}" readonly="readonly" class="form-control kitchensink-test-month-input" />
+
+        <label slot="kitchensink/datepicker-day-label" class="control-label">Day</label>
+
+        <input slot="kitchensink/datepicker-day-input" type="text" value="{{model.Day}}" readonly="readonly" class="form-control kitchensink-test-day-input" />
+    </template>
+</template>

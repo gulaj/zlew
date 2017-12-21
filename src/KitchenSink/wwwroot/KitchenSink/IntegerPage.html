@@ -1,0 +1,13 @@
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/integer-heading" class="kitchensink-heading-1">Integer Input</h1>
+
+        <p slot="kitchensink/integer-description">JSON's primitive value type <code>number</code> can be mapped directly to HTML form elements <code>input type="number"</code>.</p>
+
+        <p slot="kitchensink/integer-info">A integer value is declared in Starcounter's JSON-by-example by providing an integer value, e.g. <code>0</code></p>
+
+        <label slot="kitchensink/integer-label" class="control-label">{{model.AgeReaction}}</label>
+
+        <input slot="kitchensink/integer-input" type="number" value="{{model.Age$::input}}" placeholder="Age" class="form-control">
+    </template>
+</template>

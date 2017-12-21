@@ -1,0 +1,33 @@
+﻿<link rel="import" href="/sys/paper-input/paper-input.html" />
+
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/text-heading" class="kitchensink-heading-1">Text Input</h1>
+
+        <p slot="kitchensink/text-description">JSON's primitive value type <code>string</code> can be mapped directly to HTML form <code>input type="text"</code>.</p>
+
+        <h2 slot="kitchensink/text-listening-heading" class="kitchensink-heading-2">Listening to changes</h2>
+
+        <p slot="kitchensink/text-listening-description">Bind to <code>::change</code> listener to send the new value to the server when the field is unfocused. Read more about the target change events in the <a href="https://www.polymer-project.org/1.0/docs/devguide/data-binding.html#two-way-native">Polymer docs</a>.</p>
+
+        <label slot="kitchensink/text-listening-label" class="control-label kitchensink-test-name-label">{{model.NameReaction}}</label>
+
+        <input slot="kitchensink/text-listening-input" type="text" value="{{model.Name$::change}}" placeholder="Name" class="form-control kitchensink-test-name-input">
+
+        <h2 slot="kitchensink/text-typing-listening-heading" class="kitchensink-heading-2">Listening to changes while typing</h2>
+
+        <p slot="kitchensink/text-typing-listening-description">Need to update the server after each keystroke? Bind to <code>::input</code>:</p>
+
+        <label slot="kitchensink/text-typing-listening-label" class="control-label kitchensink-test-name-label-dynamic">{{model.NameLiveReaction}}</label>
+
+        <input slot="kitchensink/text-typing-listening-input" type="text" value="{{model.NameLive$::input}}" placeholder="Name" class="form-control kitchensink-test-name-input-dynamic">
+
+        <p slot="kitchensink/text-listening-paper-label" class="kitchensink-text-paper-input-description">You can also use any custom element, such as <a href="https://www.webcomponents.org/element/PolymerElements/paper-input">paper-input</a>. Make sure to observe an event triggered by the custom element after the interaction. For instance, `paper-input` triggers a <code>change</code> event after its value was changed and unfocused:</p> 
+
+        <paper-input slot="kitchensink/text-listening-paper-input" label="{{model.NameForPaperReaction}}" value="{{model.NameForPaper$::change}}" class="kitchensink-test-name-paper-input"></paper-input><br />
+
+        <p slot="kitchensink/text-typing-listening-paper-label">If you need to observe the changes while typing, paper-text triggers <code>value-changed</code> event after each keystroke. This allows to bind it live with the server:</p>       
+
+        <paper-input slot="kitchensink/text-typing-listening-paper-input" label="{{model.NameForPaperLiveReaction}}" value="{{model.NameForPaperLive$::value-changed}}" class="kitchensink-test-name-paper-input-dynamic"></paper-input>
+    </template>
+</template>

@@ -1,0 +1,16 @@
+{
+  "Html": "/KitchenSink/ButtonPage.html",
+
+  "AddCarrotsTrigger$": 0,
+  "EnableCarrotEngine$": false,
+  "AddOneCarrotTrigger$": 0,
+  "AddOneCarrotDisabled": false,
+  "BuyCarrotTrigger$": 0,
+
+  "TakeOneRegeneratingCarrotTrigger$": 0,
+
+  "CarrotsReaction": "You don't have any carrots",
+  "CarrotEngineReaction": "Carrot engine is off",
+  "OneCarrotReaction": "You don't have any carrots",
+  "OnBuyReaction": "You don't have any carrots"
+}

@@ -1,0 +1,42 @@
+﻿<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/validation-heading" class="kitchensink-heading-1">Validation</h1>
+
+        <p slot="kitchensink/validation-description">JSON's primitive value type <code>string</code> can be mapped directly to HTML form <code>input type="text"</code> with require validation.</p>
+
+        <label slot="kitchensink/validation-name-label" class="control-label">Please type your name</label>
+
+        <input slot="kitchensink/validation-name-input" type="text" test-value$="{{model.Name$}}" value="{{model.Name$::change}}" placeholder="Name" class="form-control">
+        <label slot="kitchensink/validation-name-error-message" class="error-label kitchensink-test-name-error-label">{{model.ErrorName$}}</label>
+        <br />
+
+        <label slot="kitchensink/validation-last-name-label" class="control-label">Please type your last name</label>
+
+        <input slot="kitchensink/validation-last-name-input" type="text" test-value$="{{model.LastName$}}" value="{{model.LastName$::change}}" placeholder="Last name" class="form-control">
+        <label slot="kitchensink/validation-last-name-error-message" class="error-label kitchensink-test-lastname-error-label">{{model.ErrorLastName$}}</label>
+        <br/>
+
+        <button slot="kitchensink/validation-validate-button" class="btn btn-sm btn-default" value="{{model.ValidateTrigger$::click}}" onmousedown="++this.value">Validate</button>
+    </template>
+    <template is="declarative-shadow-dom">
+        <style>
+            .kitchensink-validation-error-message {
+                margin-bottom: 20px;
+            }
+
+        </style>
+        <slot name="kitchensink/validation-heading"></slot>
+        <slot name="kitchensink/validation-description"></slot>
+        <slot name="kitchensink/validation-name-label"></slot>
+        <slot name="kitchensink/validation-name-input"></slot>
+        <div class="kitchensink-validation-error-message">
+            <slot name="kitchensink/validation-name-error-message"></slot>         
+        </div>
+        <slot name="kitchensink/validation-last-name-label"></slot>
+        <slot name="kitchensink/validation-last-name-input"></slot>
+        <div class="kitchensink-validation-error-message">
+            <slot name="kitchensink/validation-last-name-error-message"></slot>          
+        </div>
+        <slot name="kitchensink/validation-validate-button"></slot>
+    </template>
+</template>

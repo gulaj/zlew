@@ -1,0 +1,71 @@
+﻿<template>
+    <h1 slot="kitchensink/clientlocalstatepage-heading" class="kitchensink-heading-1">Client Local State</h1>
+    <p slot="kitchensink/clientlocalstatepage-description">This page demonstrates the ability to keep parts of your state local (unsynced with the server).</p>
+    <template is="dom-bind">
+        <p><em>Please hover an item to see it in action</em></p>
+        <ul class="kitchensink-clientlocalstatepage-hoverable-list">
+            <template is="dom-repeat" items="{{model.People}}">
+                <li>
+                    <define-local public="{{item}}" prop="_local"></define-local>
+                    <hover-observer is-hovered="{{item._local.isHovered}}">
+                        <span>{{item.Name}}</span>
+                        <template is="dom-if" if="{{item._local.isHovered}}">
+                            <span>Hovered</span>
+                        </template>
+                    </hover-observer>
+                </li>
+            </template>
+        </ul>
+    </template>
+</template>
+
+<dom-module is="define-local">
+    <template>
+    </template>
+    <script>
+        Polymer({
+            is: 'define-local',
+            properties: {
+                public: {
+                    type: Object,
+                    notify: true
+                },
+                prop: {
+                    type: String
+                }
+            },
+            attached: function() {
+                if (this.prop) {
+                    Object.defineProperty(this.public, this.prop, {
+                        enumerable: false,
+                        value: {}
+                    });
+                }
+            }
+        })
+    </script>
+</dom-module>
+
+<dom-module is="hover-observer">
+    <template>
+        <slot></slot>
+    </template>
+    <script>
+        Polymer({
+            is: 'hover-observer',
+            listeners: {
+                'mouseenter': 'toggleHover',
+                'mouseleave': 'toggleHover'
+            },
+            properties: {
+                isHovered: {
+                    type: Boolean,
+                    notify: true
+                }
+            },
+            toggleHover: function() {
+                this.isHovered = !this.isHovered;
+            }
+        })
+    </script>
+</dom-module>

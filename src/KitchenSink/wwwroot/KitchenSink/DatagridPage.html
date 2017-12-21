@@ -1,0 +1,31 @@
+﻿<link rel="import" href="/sys/hot-table/hot-table.html" />
+<link rel="import" href="/sys/hot-table/src/hot-table-style.html" />
+
+<template>
+  <!-- this works with Shady DOM (not Shadow DOM). You don't have to use it in Shadow DOM -->
+  <style is="custom-style" include="hot-table-style"></style>
+
+    <template is="dom-bind">
+        <h1 slot="kitchensink/datagrid-heading" class="kitchensink-heading-1">Datagrid</h1>
+
+        <p slot="kitchensink/datagrid-description">JSON's <code>array</code> and <code>object</code> can be used to create editable datagrid with a helper custom element, e.g. <a href="http://handsontable.github.io/hot-table/">hot-table</a>.
+        </p>
+
+        <hot-table slot="kitchensink/datagrid-table" datarows="{{model.Pets}}">
+            <hot-column value="Name$" header="Name"></hot-column>
+            <hot-column value="Kind$" header="Kind"></hot-column>
+            <hot-column value="Sound" header="Sound" read-only></hot-column>
+        </hot-table>
+        <button slot="kitchensink/datagrid-button" class="btn btn-sm btn-default" value="{{model.AddPetTrigger$::click}}" onmousedown="++this.value">Add a pet</button>
+    </template>
+    <script>
+        window.addEventListener("keyup", function () {
+            //trigger dirty checking of HOT changes in Puppet (https://github.com/Starcounter/Starcounter/issues/3191)
+            //needed because Handsontable cancels propagation of keydown event (but not keyup)
+            var puppet = document.querySelector("puppet-client");
+            if (puppet.puppet) {
+                jsonpatch.generate(puppet.puppet.observer);
+            }
+        });
+    </script>
+</template>

@@ -1,0 +1,27 @@
+﻿<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/nested-heading" class="kitchensink-heading-1">Nested Views</h1>
+
+        <p slot="kitchensink/nested-description">JSON's primitive value type <code>object</code> can be used for nesting of the partials. This also works for recursive nesting.</p>
+        <button slot="kitchensink/nested-add-child-button" class="btn btn-sm btn-default" value="{{model.AddChildTrigger$::click}}" onmousedown="++this.value">Add child</button>
+        <div slot="kitchensink/nested-child-label">Hi, <span>{{model.Name}}</span></div>
+        <starcounter-include slot="kitchensink/nested-child-partial" partial="{{model.ChildPartial}}"></starcounter-include>
+    </template>
+    <template is="declarative-shadow-dom">
+        <style>
+            .kitchensink-nested-child {
+                padding: 10px;
+                border: 1px solid #eeeeee;
+            }
+        </style>
+        <slot name="kitchensink/nested-heading"></slot>
+        <slot name="kitchensink/nested-description"></slot>
+        <div class="kitchensink-nested-child">
+            <slot name="kitchensink/nested-add-child-button"></slot>
+            <slot name="kitchensink/nested-child-label"></slot>
+            <div>
+                <slot name="kitchensink/nested-child-partial"></slot>         
+            </div>
+        </div>
+    </template>
+</template>

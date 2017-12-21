@@ -1,0 +1,216 @@
+﻿<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/callback-heading" class="kitchensink-heading-1">Async Response</h1>
+
+        <p slot="kitchensink/callback-description">
+            This page demonstrates how to achive old fassion <code>callback</code> behaviour using Starcounter.
+        </p>
+
+        <h2 slot="kitchensink/callback-responsive-label" class="kitchensink-heading-2">Responsive save button</h2>
+        <button slot="kitchensink/callback-responsive-button" type="button" class="btn btn-sm btn-default" value="{{model.SaveTrigger$::click}}" disabled="{{model.SaveTrigger$}}" onmouseup="++this.value;">Save changes (1s)</button>
+        <button slot="kitchensink/callback-responsive-button-spin" type="button" class="btn btn-sm btn-default" value="{{model.SaveAndSpinTrigger$::click}}" disabled="{{model.SaveAndSpinTrigger$}}" onmouseup="++this.value;">
+            <template is="dom-if" if="{{model.SaveAndSpinTrigger$}}">
+                <i class="kitchen-sink-spinner glyphicon glyphicon-refresh"></i>
+            </template>
+            Save changes with loading icon (1s)
+        </button>
+
+        <h2 slot="kitchensink/callback-save-server-heading" class="kitchensink-heading-2">Save button with server side message</h2>
+        <div slot="kitchensink/callback-save-server-message">
+            <template is="dom-if" if="{{model.SuccessMessage$}}">
+                <p class="alert alert-success">{{model.SuccessMessage$}}</p>
+            </template>
+            <template is="dom-if" if="{{model.ErrorMessage$}}">
+                <p class="alert alert-danger">{{model.ErrorMessage$}}</p>
+            </template>
+        </div>
+        <button slot="kitchensink/callback-save-server-button" type="button" class="btn btn-sm btn-default" value="{{model.SaveAndMessageTrigger$::click}}" disabled="{{model.SaveAndMessageTrigger$}}" onmouseup="++this.value;">Randomly save or fail changes (1s)</button>
+        <h2 slot="kitchensink/callback-save-client-heading" class="kitchensink-heading-2">Save button with client side message</h2>
+        <p slot="kitchensink/callback-save-client-note">
+            <b>Note:</b> client side <code>template.observers</code> work only in browsers with native <code>&lt;template&gt;</code> tag implementation.
+        </p>
+        <div slot="kitchensink/callback-save-client-message">
+            <template is="dom-if" if="{{local.InfoMessage$}}">
+                <p class="alert alert-info">{{local.InfoMessage$}}</p>
+            </template>
+            <template is="dom-if" if="{{local.SuccessMessage$}}">
+                <p class="alert alert-success">{{local.SuccessMessage$}}</p>
+            </template>
+            <template is="dom-if" if="{{local.ErrorMessage$}}">
+                <p class="alert alert-danger">{{local.ErrorMessage$}}</p>
+            </template>
+        </div>
+
+        <button slot="kitchensink/callback-save-client-button" type="button" class="btn btn-sm btn-default" value="{{model.SaveAndClientMessageTrigger$::click}}" disabled="{{model.SaveAndClientMessageTrigger$}}" onmouseup="++this.value;">Randomly save or fail changes (1s)</button>
+
+        <h2 slot="kitchensink/callback-table-heading" class="kitchensink-heading-2">Same things inside table</h2>
+        <p slot="kitchensink/callback-table-note">
+            <small><b>Note:</b> <code>dom-repeat</code> inside <code>table</code> <a href="https://github.com/Polymer/polymer/issues/1567" target="_blank">does not work in Internet Explorer</a>.</small>
+        </p>
+        <table slot="kitchensink/callback-table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2">#</th>
+                    <th colspan="2">Message</th>
+                    <th colspan="2">Responsive button</th>
+                    <th colspan="2">With message</th>
+                </tr>
+                <tr>
+                    <th>Server</th>
+                    <th>Client</th>
+                    <th>Simple</th>
+                    <th>Loading icon</th>
+                    <th>Server</th>
+                    <th>Client</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template is="dom-repeat" items="{{model.Items}}">
+                    <tr>
+                        <td>{{index}}</td>
+                        <td>
+                            <template is="dom-if" if="{{item.SuccessMessage$}}">
+                                <span class="label label-success">{{item.SuccessMessage$}}</span>
+                            </template>
+                            <template is="dom-if" if="{{item.ErrorMessage$}}">
+                                <span class="label label-danger">{{item.ErrorMessage$}}</span>
+                            </template>
+                        </td>
+                        <td>
+                            <template is="dom-if" if="{{item.local.InfoMessage$}}">
+                                <span class="label label-info">{{item.local.InfoMessage$}}</span>
+                            </template>
+                            <template is="dom-if" if="{{item.local.SuccessMessage$}}">
+                                <span class="label label-success">{{item.local.SuccessMessage$}}</span>
+                            </template>
+                            <template is="dom-if" if="{{item.local.ErrorMessage$}}">
+                                <span class="label label-danger">{{item.local.ErrorMessage$}}</span>
+                            </template>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-default" value="{{item.SaveTrigger$::click}}" disabled="{{item.SaveTrigger$}}" onmouseup="++this.value;">Save</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-default" value="{{item.SaveAndSpinTrigger$::click}}" disabled="{{item.SaveAndSpinTrigger$}}" onmouseup="++this.value;">
+                                <template is="dom-if" if="{{item.SaveAndSpinTrigger$}}">
+                                    <i class="kitchen-sink-spinner glyphicon glyphicon-refresh"></i>
+                                </template>
+                                Save with icon
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-default" value="{{item.SaveAndMessageTrigger$::click}}" disabled="{{item.SaveAndMessageTrigger$}}" onmouseup="++this.value;">Save</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-default" disabled="{{item.SaveAndClientMessageTrigger$}}" item="{{item}}" index="{{index}}" on-click="onItemSaveAndClientMessageClick">Save</button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+    <script>
+        (function () {
+            var script = document._currentScript || document.currentScript;
+            var template = script.previousElementSibling;
+
+            template.local = {
+                InfoMessage$: "",
+                SuccessMessage$: "",
+                ErrorMessage$: ""
+            };
+
+            template.observers = ["onSaveAndClientMessageClickChange(model.SaveAndClientMessageTrigger$)", "onItemChange(model.Items.*)"];
+
+            template.onSaveAndClientMessageClickChange = function (value) {
+                if (value) {
+                    // Button clicked, the value is greater than zero
+                    template.set("local.InfoMessage$", "Saving changes ...");
+                    template.set("local.SuccessMessage$", "");
+                    template.set("local.ErrorMessage$", "");
+                } else {
+                    // Received response from server and button's value reset
+                    template.set("local.InfoMessage$", "");
+
+                    if (new Date().getTime() % 2 == 0) {
+                        template.set("local.SuccessMessage$", "The changes are successfully saved");
+                    } else { 
+                        template.set("local.ErrorMessage$", "Failed to save changes");
+                    }
+                }
+            };
+
+            template.onItemChange = function (e) {
+                var path = e.path.split(".");
+                
+                if (path[path.length - 1] != "SaveAndClientMessageTrigger$") {
+                    return;
+                }
+
+                path.splice(-1);
+                path = path.join(".");
+
+                var item = template.get(path);
+                var value = e.value;
+
+                if (value) {
+                    // Button clicked, the value is greater than zero
+                    template.set(path + ".local.InfoMessage$", "Saving changes ...");
+                    template.set(path + ".local.SuccessMessage$", "");
+                    template.set(path + ".local.ErrorMessage$", "");
+                } else {
+                    // Received response from server and button's value reset
+                    template.set(path + ".local.InfoMessage$", "");
+
+                    if (new Date().getTime() % 2 == 0) {
+                        template.set(path + ".local.SuccessMessage$", "The changes are successfully saved");
+                    } else {
+                        template.set(path + ".local.ErrorMessage$", "Failed to save changes");
+                    }
+                }
+            };
+
+            template.onItemSaveAndClientMessageClick = function (e) {
+                var btn = e.currentTarget;
+                var index = btn.index;
+                var item = btn.item;
+
+                if (!item.local) {
+                    Object.defineProperty(item, "local", {
+                        enumerable: false,
+                        writable: true,
+                        value: {
+                            InfoMessage$: "",
+                            SuccessMessage$: "",
+                            ErrorMessage$: ""
+                        }
+                    });
+                }
+
+                template.set("model.Items." + index + ".SaveAndClientMessageTrigger$", item.SaveAndClientMessageClick$ + 1);
+            };
+        })();
+    </script>
+    <template is="declarative-shadow-dom">
+        <slot name="kitchensink/callback-heading"></slot>
+        <slot name="kitchensink/callback-description"></slot>
+        <slot name="kitchensink/callback-responsive-label"></slot>
+        <div>
+            <slot name="kitchensink/callback-responsive-button"></slot>
+            <slot name="kitchensink/callback-responsive-button-spin"></slot>
+        </div>
+        <slot name="kitchensink/callback-save-server-heading"></slot>
+        <slot name="kitchensink/callback-save-server-message"></slot>
+        <slot name="kitchensink/callback-save-server-button"></slot>
+        <slot name="kitchensink/callback-save-client-heading"></slot>
+        <slot name="kitchensink/callback-save-client-note"></slot>
+        <slot name="kitchensink/callback-save-client-message"></slot>
+
+        <p>
+            <slot name="kitchensink/callback-save-client-button"></slot>
+        </p>
+        <slot name="kitchensink/callback-table-heading"></slot>
+        <slot name="kitchensink/callback-table-note"></slot>
+        <slot name="kitchensink/callback-table"></slot>
+    </template>
+</template>

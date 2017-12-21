@@ -1,0 +1,36 @@
+﻿<link href="/sys/paper-dialog/paper-dialog.html" rel="import" />
+
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/dialog-heading" class="kitchensink-heading-1">Dialog Box</h1>
+
+        <p slot="kitchensink/dialog-description">Modal dialog box example</p>
+
+        <button slot="kitchensink/dialog-button" class="btn btn-sm btn-default" value="{{model.OpenTrigger$::click}}" onmousedown="++this.value">Open dialog box</button>
+
+        <p slot="kitchensink/dialog-message" class$="{{model.MessageCss}}">{{model.Message}}</p>
+
+        <paper-dialog slot="kitchensink/dialog-paper-dialog" id="actions" opened="[[model.Opened]]" modal="true">
+            <div>
+                <h2>Confirmation</h2>
+                <p>
+                    This is a<code>paper-dialog</code> demo confirmation. Would you like to <b>Reject</b> or <b>Accept</b> the confirmation?
+                </p>
+            </div>
+            <div class="buttons">
+                <button class="btn btn-sm btn-default" dialog-dismiss value="{{model.RejectTrigger$::click}}" onmousedown="++this.value;">Reject</button>
+                <span>&nbsp;</span>
+                <button class="btn btn-sm btn-primary" dialog-confirm autofocus value="{{model.ConfirmTrigger$::click}}" onmousedown="++this.value;">Accept</button>
+            </div>
+        </paper-dialog>
+    </template>
+    <template is="declarative-shadow-dom">
+        <slot name="kitchensink/dialog-heading"></slot>
+        <slot name="kitchensink/dialog-description"></slot>
+        <p>
+            <slot name="kitchensink/dialog-button"></slot>
+        </p>
+        <slot name="kitchensink/dialog-message"></slot>
+        <slot name="kitchensink/dialog-paper-dialog"></slot>
+    </template>
+</template>

@@ -1,0 +1,13 @@
+﻿<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/checkbox-heading" class="kitchensink-heading-1">Sortable List</h1>
+
+        <p slot="kitchensink/checkbox-description">JSON's primitive value type <code>boolean</code> can be mapped directly to HTML form elements <code>input type="checkbox"</code>.</p>
+
+        <label slot="kitchensink/checkbox-label">Driver's license</label>
+
+        <input slot="kitchensink/checkbox-input" class="kitchensink-test-driver-license-input" type="checkbox" checked="{{model.DrivingLicense$::change}}">
+
+        <div slot="kitchensink/checkbox-license-label" class="kitchensink-test-driver-license-label">{{model.DrivingLicenseReaction}}</div>
+    </template>
+</template>

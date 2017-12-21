@@ -1,0 +1,25 @@
+﻿<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/table-heading" class="kitchensink-heading-1">Table</h1>
+
+        <p slot="kitchensink/table-description">JSON's <code>array</code> and <code>object</code> can be used to create a HTML <code>table</code>.</p>
+
+        <table slot="kitchensink/table-table" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Kind</th>
+            </tr>
+            </thead>
+            <tbody>
+            <template is="dom-repeat" items="{{model.Pets}}">
+                <tr>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Kind}}</td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+        <button slot="kitchensink/table-button" class="btn btn-sm btn-default" value="{{model.AddPetTrigger$::click}}" onmousedown="++this.value">Add a pet</button>
+    </template>
+</template>

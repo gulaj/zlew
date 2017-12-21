@@ -1,0 +1,56 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/flashMessage-heading" class="kitchensink-heading-1">Flash Message</h1>
+        
+        <p slot="kitchensink/flashMessage-description">By pressing the buttons below, you will trigger a message to be displayed for 3 seconds. It is possible to trigger a message both from the server side, and the client side!</p>
+        <p slot="kitchensink/flashMessage-dom-if-description">By using <code>&lt;template is="dom-if"&gt;</code> it is possible to hide or show an element in the HTML depending on the result of the if-statement.</p>
+
+        <p slot="kitchensink/flashMessage-schedule-task-description">And if you combine that with <code>Scheduling.ScheduleTask</code> and <code>Session.ScheduleTask</code> you can make a server side message appear.</p>
+
+        <button slot="kitchensink/flashMessage-server-button" class="btn btn-default" value="{{model.ShowMessageTrigger$::click}}" onmousedown="++this.value">Trigger message from Server side</button>
+
+        <div slot="kitchensink/flashMessage-server-message">
+            <template is="dom-if" if="{{model.ServerMessage}}">
+                <p class="alert alert-info">{{model.ServerMessage}} </p>
+            </template>
+        </div>
+
+        <p slot="kitchensink/flashMessage-client-description">And by combining <code>&lt;template is="dom-if"&gt;</code> with a click event and a timed function, by using <code>setTimeout</code> you can achieve the same behavior.</p>
+        <button slot="kitchensink/flashMessage-client-button" class="btn btn-default" on-click="showMessage">Trigger message from Client side</button>
+        <div slot="kitchensink/flashMessage-client-message">
+            <template is="dom-if" if="{{model.ClientMessage$}}">
+                <p class="alert alert-warning">{{model.ClientMessage$}} </p>
+            </template>
+        </div>
+    </template>
+    <script>
+        (function () {
+            var script = document._currentScript || document.currentScript;
+            var template = script.previousElementSibling;
+
+            template.showMessage = function () {
+                template.set("model.ClientMessage$", "This message was set on the Client Side!");
+                setTimeout(() => {
+                    template.set("model.ClientMessage$", "");
+                }, 3000);
+            };
+        })();
+    </script>
+    <template is="declarative-shadow-dom">
+        <slot name="kitchensink/flashMessage-heading"></slot>
+        <slot name="kitchensink/flashMessage-description"></slot>
+        <slot name="kitchensink/flashMessage-dom-if-description"></slot>
+        <slot name="kitchensink/flashMessage-schedule-task-description"></slot>
+        <p>
+            <slot name="kitchensink/flashMessage-server-button"></slot>          
+        </p>
+        <slot name="kitchensink/flashMessage-server-message"></slot>
+        <slot name="kitchensink/flashMessage-client-description"></slot>
+        <p>
+            <slot name="kitchensink/flashMessage-client-button"></slot>
+        </p>
+        <slot name="kitchensink/flashMessage-client-message"></slot>
+    </template>
+</template>

@@ -1,0 +1,57 @@
+﻿<template>
+    <template is="dom-bind">
+        <div slot="kitchensink/nav-navigation" class="kitchensink-layout">
+            <nav class="kitchensink-layout__column-left">
+                <ul class="kitchensink-menu__list">
+                    <li><a href="/KitchenSink/MainPage"><span class="glyphicon glyphicon-home"></span></a></li>
+                </ul>
+                <h3 class="kitchensink-menu__heading kitchensink-menu__heading--first"><b>Rendering</b></h3>
+                <ul class="kitchensink-menu__list">
+                    <li><a href="/KitchenSink/Breadcrumb">Breadcrumb</a></li>
+                    <li><a href="/KitchenSink/Chart">Chart</a></li>
+                    <li><a href="/KitchenSink/Datagrid">Datagrid</a></li>
+                    <li><a href="/KitchenSink/Html">HTML</a></li>
+                    <li><a href="/KitchenSink/Url">Link</a></li>
+                    <li><a href="/KitchenSink/Geo">Map</a></li>
+                    <li><a href="/KitchenSink/Markdown">Markdown</a></li>
+                    <li><a href="/KitchenSink/Pagination">Pagination</a></li>
+                    <li><a href="/KitchenSink/Table">Table</a></li>
+                </ul>
+                <h3 class="kitchensink-menu__heading"><b>Server Push</b></h3>
+                <ul class="kitchensink-menu__list">
+                    <li><a href="/KitchenSink/Callback">Async Response</a></li>
+                    <li><a href="/KitchenSink/Cookie">Cookies</a></li>
+                    <li><a href="/KitchenSink/Dialog">Dialog Box</a></li>
+                    <li><a href="/KitchenSink/FlashMessage">Flash Message</a></li>
+                    <li><a href="/KitchenSink/LazyLoading"> Lazy Loading</a></li>
+                    <li><a href="/KitchenSink/Nested">Nested Views</a></li>
+                    <li><a href="/KitchenSink/ProgressBar">Progress Bar</a></li>
+                    <li><a href="/KitchenSink/Redirect">Redirect</a></li>
+                    <li><a href="/KitchenSink/ClientLocalState">Client Local State</a></li>
+                </ul>
+                <h3 class="kitchensink-menu__heading"><b>User Input</b></h3>
+                <ul class="kitchensink-menu__list">
+                    <li><a href="/KitchenSink/Autocomplete">Autocomplete</a></li>
+                    <li><a href="/KitchenSink/Button">Button</a></li>
+                    <li><a href="/KitchenSink/Checkbox">Checkbox</a></li>
+                    <li><a href="/KitchenSink/Datepicker">Datepicker</a></li>
+                    <li><a href="/KitchenSink/Dropdown">Dropdown</a></li>
+                    <li><a href="/KitchenSink/Decimal">Decimal Input</a></li>
+                    <li><a href="/KitchenSink/FileUpload">File Upload</a></li>
+                    <li><a href="/KitchenSink/Integer">Integer Input</a></li>
+                    <li><a href="/KitchenSink/Multiselect">Multiselect</a></li>
+                    <li><a href="/KitchenSink/Password">Password</a></li>
+                    <li><a href="/KitchenSink/Radio">Radio Button</a></li>
+                    <li><a href="/KitchenSink/Radiolist">Radiolist</a></li>
+                    <li><a href="/KitchenSink/Text">Text Input</a></li>
+                    <li><a href="/KitchenSink/Textarea">Textarea</a></li>
+                    <li><a href="/KitchenSink/ToggleButton">Toggle Button</a></li>
+                    <li><a href="/KitchenSink/Validation">Validation</a></li>
+                </ul>
+            </nav>
+            <div class="kitchensink-layout__column-right">
+                <starcounter-include partial="{{model.CurrentPage}}"></starcounter-include>
+            </div>
+        </div>
+    </template>
+</template>

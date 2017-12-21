@@ -1,0 +1,81 @@
+﻿<template>
+    <template is="dom-bind">
+        <h1 slot="kitchensink/buttonpage-heading" class="kitchensink-heading-1">Button</h1>
+
+        <p slot="kitchensink/buttonpage-description">JSON's primitive value type <code>number</code> or <code>boolean</code> can be mapped to a HTML <code>button</code>.
+        </p>
+
+        <h2 slot="kitchensink/buttonpage-regular-heading" class="kitchensink-heading-2">Regular button</h2>
+
+        <p slot="kitchensink/buttonpage-regular-description">We recommend using <code>number</code> wherever possible, to take benefit of non-blocking UI enabled by Puppet's operational transformation.
+        </p>
+
+        <p slot="kitchensink/buttonpage-regular-increment-label">With Polymer, there are multiple ways to increment a number on click:</p>
+
+        <ol slot="kitchensink/buttonpage-regular-increment-ways">
+            <li>A <code>button</code> element, with inline script</li>
+            <li>A <code>button</code> element with a helper function</li>
+            <li>Any other element (<code>span</code>, etc) with a helper function</li>
+        </ol>
+
+        <pre slot="kitchensink/buttonpage-regular-reaction-label" class="kitchensink-test-carrots-reaction-label">{{model.CarrotsReaction}}</pre>
+
+        <p slot="kitchensink/buttonpage-regular-add-carrots" class="kitchensink-add-carrots">
+            <span class="kitchensink-add-carrots__label">Add carrots:</span>
+
+            <button class="btn btn-sm btn-default" value="{{model.AddCarrotsTrigger$::click}}" onmousedown="++this.value">Button (inline script)</button>
+
+            <button class="btn btn-sm btn-default" on-click="onAddCarrotsClick">Button (function)</button>
+
+            <span class="btn btn-sm btn-default" on-click="onAddCarrotsClick">Span (function)</span>
+        </p>
+
+        <h2 slot="kitchensink/buttonpage-switch-heading" class="kitchensink-heading-2">Switch button</h2>
+
+        <p slot="kitchensink/buttonpage-switch-description">When you have a special need to use the pressed state of a button, you might want to use <code>boolean</code> type for buttons.
+        </p>
+
+        <button slot="kitchensink/buttonpage-switch-button" class="btn btn-sm btn-default kitchensink-toggle-button" pressed$="{{model.EnableCarrotEngine$}}" on-click="onEnableCarrotEngineClick">Enable carrot engine</button>
+
+        <span slot="kitchensink/buttonpage-switch-reaction-label" class="kitchensink-test-carrot-engine-reaction-label">{{model.CarrotEngineReaction}}</span>
+
+        <h2 slot="kitchensink/buttonpage-disable-heading" class="kitchensink-heading-2">Disabled button</h2>
+
+        <p slot="kitchensink/buttonpage-disable-description">It is possible to mark button as disabled using the <code>disabled</code> boolean attribute. The below button gets disbled when the value reaches 1.
+        </p>
+
+        <button slot="kitchensink/buttonpage-disable-button" class="btn btn-sm btn-default kitchensink-toggle-button" value="{{model.AddOneCarrotTrigger$::click}}" onmousedown="++this.value" disabled$="{{model.AddOneCarrotDisabled}}">Add carrots</button>
+
+        <span slot="kitchensink/buttonpage-disable-label" class="kitchensink-test-one-carrot-reaction-label">{{model.OneCarrotReaction}}</span>
+
+        <h2 slot="kitchensink/buttonpage-self-heading" class="kitchensink-heading-2">Self Disabling/Enabling Button</h2>
+
+        <p slot="kitchensink/buttonpage-self-reaction-label">It is also possible to make the server respond to the button click. The following buttons will stay disabled until the server responds to them being clicked.</p>
+        <div slot="kitchensink/buttonpage-self-button" class="kitchensink-regenerating-carrots">
+            <button class="btn btn-sm btn-default kitchensink-toggle-button" value="{{model.TakeOneRegeneratingCarrotTrigger$::click}}" disabled="{{model.TakeOneRegeneratingCarrotTrigger$}}" onmouseup="++this.value">Take one Regenerating Carrot</button>
+            <template is="dom-if" if="{{model.TakeOneRegeneratingCarrotTrigger$}}">
+                <p class="kitchensink-test-self-button-label">Currently Regenerating!</p>
+            </template>
+        </div>
+
+        <h2 slot="kitchensink/buttonpage-binding-issue-heading" class="kitchensink-heading-2">Button with children</h2>
+        <p slot="kitchensink/buttonpage-binding-issue-description">Because of an <a href="https://github.com/Polymer/polymer/issues/2497">issue in Polymer 1</a>, data bindings for buttons with child elements writes undefined value to the view-model property bound to the buttons, which leads to server disconnection. As a workaround, set the <code>pointer-events</code> property to <code>none</code> on the children of the button.</p>
+        <p slot="kitchensink/buttonpage-binding-issue-click-label"><b>Click to buy a carrot!</b></p>
+        <button slot="kitchensink/buttonpage-binding-issue-button" class="btn btn-sm btn-default kitchensink-toggle-button kitchesink-test-buy-carrot-button" value="{{model.BuyCarrotTrigger$::click}}" onmousedown="++this.value"><span class="glyphicon glyphicon-usd kitchensink-buy-carrot"></span></button>
+        <span slot="kitchensink/buttonpage-binding-issue-label" class="kitchensink-test-buy-carrot-reaction-label">{{model.OnBuyReaction}}</span>
+    </template>
+    <script>
+        (function () {
+            var script = document._currentScript || document.currentScript;
+            var template = script.previousElementSibling;
+
+            template.onEnableCarrotEngineClick = function () {
+                template.set("model.EnableCarrotEngine$", !template.model.EnableCarrotEngine$);
+            };
+
+            template.onAddCarrotsClick = function () {
+                template.set("model.AddCarrots$", ++template.model.AddCarrotsTrigger$);
+            };
+        })();
+    </script>
+</template>
